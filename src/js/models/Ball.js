@@ -4,7 +4,7 @@ import {
   BALL_WIDTH,
   BALL_HEIGHT,
   BALL_START_HEIGHT,
-  GRAVITY,
+  BALL_GRAVITY,
   BOUNCE_DAMPING,
   MID_FIELD,
   PLAYER_WIDTH,
@@ -19,7 +19,7 @@ export default class Ball extends GameObject {
   update() {
     super.update();
     if (this.position.y + this.height + this.velocity.y <= MID_FIELD) {
-      this.velocity.y += GRAVITY;
+      this.velocity.y += BALL_GRAVITY;
     } else {
       this.velocity.y = -this.velocity.y * BOUNCE_DAMPING; // Invert and dampen the velocity
 
@@ -36,11 +36,9 @@ export default class Ball extends GameObject {
     // Ensure position stays within bounds (adjust as needed)
     this.position.x = Math.max(0, Math.min(this.position.x, 1920 - BALL_WIDTH)); // Assuming 1920 is the game width
     this.position.y = Math.max(
-      0,
+      this.position.y,
       Math.min(this.position.y, MID_FIELD - BALL_HEIGHT)
     );
-
-    console.log(this.position.x, this.position.y);
   }
 
   reset(playerX, playerY) {

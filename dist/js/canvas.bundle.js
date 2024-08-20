@@ -92,15 +92,16 @@ window.addEventListener("keyup", function (_ref2) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   BALL_GRAVITY: () => (/* binding */ BALL_GRAVITY),
 /* harmony export */   BALL_HEIGHT: () => (/* binding */ BALL_HEIGHT),
 /* harmony export */   BALL_START_HEIGHT: () => (/* binding */ BALL_START_HEIGHT),
 /* harmony export */   BALL_WIDTH: () => (/* binding */ BALL_WIDTH),
 /* harmony export */   BOUNCE_DAMPING: () => (/* binding */ BOUNCE_DAMPING),
 /* harmony export */   CANVAS_HEIGHT: () => (/* binding */ CANVAS_HEIGHT),
 /* harmony export */   CANVAS_WIDTH: () => (/* binding */ CANVAS_WIDTH),
-/* harmony export */   GRAVITY: () => (/* binding */ GRAVITY),
 /* harmony export */   LEFT_BOUNDARY: () => (/* binding */ LEFT_BOUNDARY),
 /* harmony export */   MID_FIELD: () => (/* binding */ MID_FIELD),
+/* harmony export */   PLAYER_GRAVITY: () => (/* binding */ PLAYER_GRAVITY),
 /* harmony export */   PLAYER_HEIGHT: () => (/* binding */ PLAYER_HEIGHT),
 /* harmony export */   PLAYER_JUMP_VELOCITY: () => (/* binding */ PLAYER_JUMP_VELOCITY),
 /* harmony export */   PLAYER_MOVE_SPEED: () => (/* binding */ PLAYER_MOVE_SPEED),
@@ -110,11 +111,12 @@ __webpack_require__.r(__webpack_exports__);
 var CANVAS_WIDTH = window.innerWidth;
 var CANVAS_HEIGHT = window.innerHeight;
 var MID_FIELD = 430;
-var GRAVITY = 0.2;
+var BALL_GRAVITY = 0.2;
+var PLAYER_GRAVITY = 0.3;
 var BOUNCE_DAMPING = 0.9;
 var PLAYER_WIDTH = 67;
 var PLAYER_HEIGHT = 77;
-var PLAYER_JUMP_VELOCITY = -10;
+var PLAYER_JUMP_VELOCITY = -15;
 var PLAYER_MOVE_SPEED = 5;
 var BALL_WIDTH = 60;
 var BALL_HEIGHT = 60;
@@ -206,7 +208,7 @@ var Ball = /*#__PURE__*/function (_GameObject) {
     value: function update() {
       _get(_getPrototypeOf(Ball.prototype), "update", this).call(this);
       if (this.position.y + this.height + this.velocity.y <= _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD) {
-        this.velocity.y += _constants_js__WEBPACK_IMPORTED_MODULE_2__.GRAVITY;
+        this.velocity.y += _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_GRAVITY;
       } else {
         this.velocity.y = -this.velocity.y * _constants_js__WEBPACK_IMPORTED_MODULE_2__.BOUNCE_DAMPING; // Invert and dampen the velocity
 
@@ -222,8 +224,7 @@ var Ball = /*#__PURE__*/function (_GameObject) {
 
       // Ensure position stays within bounds (adjust as needed)
       this.position.x = Math.max(0, Math.min(this.position.x, 1920 - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_WIDTH)); // Assuming 1920 is the game width
-      this.position.y = Math.max(0, Math.min(this.position.y, _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_HEIGHT));
-      console.log(this.position.x, this.position.y);
+      this.position.y = Math.max(this.position.y, Math.min(this.position.y, _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_HEIGHT));
     }
   }, {
     key: "reset",
@@ -394,7 +395,7 @@ var Player = /*#__PURE__*/function (_GameObject) {
     value: function update() {
       _get(_getPrototypeOf(Player.prototype), "update", this).call(this);
       if (this.position.y + this.height + this.velocity.y <= _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD) {
-        this.velocity.y += _constants_js__WEBPACK_IMPORTED_MODULE_2__.GRAVITY;
+        this.velocity.y += _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_GRAVITY;
       } else {
         this.velocity.y = 0;
         this.position.y = _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD - this.height;

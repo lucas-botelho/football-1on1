@@ -1,11 +1,12 @@
 export const CANVAS_WIDTH = window.innerWidth;
 export const CANVAS_HEIGHT = window.innerHeight;
 export const MID_FIELD = 430;
-export const GRAVITY = 0.2;
+export const BALL_GRAVITY = 0.2;
+export const PLAYER_GRAVITY = 0.3;
 export const BOUNCE_DAMPING = 0.9;
 export const PLAYER_WIDTH = 67;
 export const PLAYER_HEIGHT = 77;
-export const PLAYER_JUMP_VELOCITY = -10;
+export const PLAYER_JUMP_VELOCITY = -15;
 export const PLAYER_MOVE_SPEED = 5;
 export const BALL_WIDTH = 60;
 export const BALL_HEIGHT = 60;

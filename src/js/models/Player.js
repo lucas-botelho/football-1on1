@@ -5,7 +5,7 @@ import {
   PLAYER_HEIGHT,
   PLAYER_MOVE_SPEED,
   PLAYER_JUMP_VELOCITY,
-  GRAVITY,
+  PLAYER_GRAVITY,
   MID_FIELD,
   LEFT_BOUNDARY,
   RIGHT_BOUNDARY,
@@ -19,7 +19,7 @@ export default class Player extends GameObject {
   update() {
     super.update();
     if (this.position.y + this.height + this.velocity.y <= MID_FIELD) {
-      this.velocity.y += GRAVITY;
+      this.velocity.y += PLAYER_GRAVITY;
     } else {
       this.velocity.y = 0;
       this.position.y = MID_FIELD - this.height;
