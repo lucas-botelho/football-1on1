@@ -1,7 +1,7 @@
 import Player from "./models/Player.js";
 import Background from "./models/Background.js";
 import Ball from "./models/Ball.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, MID_FIELD } from "./constants.js";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, MID_FIELD_Y } from "./constants.js";
 
 const canvas = document.querySelector("canvas");
 const canvasContext = canvas.getContext("2d");
@@ -29,7 +29,7 @@ function animate() {
   player.isColliding(ball);
 
   // Reset ball position if it hits the ground
-  if (ball.position.y === MID_FIELD) {
+  if (ball.position.y === MID_FIELD_Y) {
   }
 }
 
@@ -60,9 +60,9 @@ window.addEventListener("keyup", ({ keyCode }) => {
   }
 });
 
-// window.addEventListener("mousemove", (event) => {
-//   const mouseX = event.clientX;
-//   const mouseY = event.clientY;
-//   console.clear();
-//   console.log(`Mouse position: x = ${mouseX}, y = ${mouseY}`);
-// });
+window.addEventListener("mousemove", (event) => {
+  const mouseX = event.clientX;
+  const mouseY = event.clientY;
+  console.clear();
+  console.log(`Mouse position: x = ${mouseX}, y = ${mouseY}`);
+});

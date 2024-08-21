@@ -6,23 +6,23 @@ import {
   PLAYER_MOVE_SPEED,
   PLAYER_JUMP_VELOCITY,
   PLAYER_GRAVITY,
-  MID_FIELD,
+  MID_FIELD_Y,
   LEFT_BOUNDARY,
   RIGHT_BOUNDARY,
 } from "../constants.js";
 
 export default class Player extends GameObject {
   constructor() {
-    super(700, MID_FIELD, PLAYER_WIDTH, PLAYER_HEIGHT, playerImg);
+    super(700, MID_FIELD_Y, PLAYER_WIDTH, PLAYER_HEIGHT, playerImg);
   }
 
   update() {
     super.update();
-    if (this.position.y + this.height + this.velocity.y <= MID_FIELD) {
+    if (this.position.y + this.height + this.velocity.y <= MID_FIELD_Y) {
       this.velocity.y += PLAYER_GRAVITY;
     } else {
       this.velocity.y = 0;
-      this.position.y = MID_FIELD - this.height;
+      this.position.y = MID_FIELD_Y - this.height;
     }
   }
 
@@ -37,7 +37,7 @@ export default class Player extends GameObject {
   }
 
   jump() {
-    if (this.position.y === MID_FIELD - this.height) {
+    if (this.position.y === MID_FIELD_Y - this.height) {
       this.velocity.y = PLAYER_JUMP_VELOCITY;
     }
   }

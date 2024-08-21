@@ -1,5 +1,7 @@
 import backgroundImg from "../../img/background.png";
 import { canvasContext } from "../canvas.js";
+import { BACKGROUND_WIDTH, CANVAS_WIDTH, MID_FIELD_X } from "../constants.js";
+
 export default class Background {
   constructor() {
     this.image = new Image();
@@ -7,6 +9,10 @@ export default class Background {
   }
 
   draw() {
-    canvasContext.drawImage(this.image, 0, 0);
+    canvasContext.drawImage(
+      this.image,
+      CANVAS_WIDTH / 2 - BACKGROUND_WIDTH / 2,
+      0
+    );
   }
 }

@@ -6,19 +6,27 @@ import {
   BALL_START_HEIGHT,
   BALL_GRAVITY,
   BOUNCE_DAMPING,
-  MID_FIELD,
+  MID_FIELD_Y,
   PLAYER_WIDTH,
+  BALL_STARTING_POS_Y,
+  CANVAS_WIDTH,
 } from "../constants.js";
 
 export default class Ball extends GameObject {
   constructor() {
-    super(890, 110, BALL_WIDTH, BALL_HEIGHT, ballImg);
+    super(
+      CANVAS_WIDTH / 2 - BALL_WIDTH / 2,
+      BALL_STARTING_POS_Y,
+      BALL_WIDTH,
+      BALL_HEIGHT,
+      ballImg
+    );
     this.velocity = { x: 0, y: 0 }; // Initialize velocity
   }
 
   update() {
     super.update();
-    if (this.position.y + this.height + this.velocity.y <= MID_FIELD) {
+    if (this.position.y + this.height + this.velocity.y <= MID_FIELD_Y) {
       this.velocity.y += BALL_GRAVITY;
     } else {
       this.velocity.y = -this.velocity.y * BOUNCE_DAMPING; // Invert and dampen the velocity
@@ -37,7 +45,7 @@ export default class Ball extends GameObject {
     this.position.x = Math.max(0, Math.min(this.position.x, 1920 - BALL_WIDTH)); // Assuming 1920 is the game width
     this.position.y = Math.max(
       this.position.y,
-      Math.min(this.position.y, MID_FIELD - BALL_HEIGHT)
+      Math.min(this.position.y, MID_FIELD_Y - BALL_HEIGHT)
     );
   }
 

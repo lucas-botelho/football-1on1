@@ -46,7 +46,7 @@ function animate() {
   player.isColliding(ball);
 
   // Reset ball position if it hits the ground
-  if (ball.position.y === _constants_js__WEBPACK_IMPORTED_MODULE_3__.MID_FIELD) {}
+  if (ball.position.y === _constants_js__WEBPACK_IMPORTED_MODULE_3__.MID_FIELD_Y) {}
 }
 animate();
 window.addEventListener("keydown", function (_ref) {
@@ -74,13 +74,12 @@ window.addEventListener("keyup", function (_ref2) {
       break;
   }
 });
-
-// window.addEventListener("mousemove", (event) => {
-//   const mouseX = event.clientX;
-//   const mouseY = event.clientY;
-//   console.clear();
-//   console.log(`Mouse position: x = ${mouseX}, y = ${mouseY}`);
-// });
+window.addEventListener("mousemove", function (event) {
+  var mouseX = event.clientX;
+  var mouseY = event.clientY;
+  console.clear();
+  console.log("Mouse position: x = ".concat(mouseX, ", y = ").concat(mouseY));
+});
 
 /***/ }),
 
@@ -92,15 +91,18 @@ window.addEventListener("keyup", function (_ref2) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   BACKGROUND_WIDTH: () => (/* binding */ BACKGROUND_WIDTH),
 /* harmony export */   BALL_GRAVITY: () => (/* binding */ BALL_GRAVITY),
 /* harmony export */   BALL_HEIGHT: () => (/* binding */ BALL_HEIGHT),
+/* harmony export */   BALL_STARTING_POS_Y: () => (/* binding */ BALL_STARTING_POS_Y),
 /* harmony export */   BALL_START_HEIGHT: () => (/* binding */ BALL_START_HEIGHT),
 /* harmony export */   BALL_WIDTH: () => (/* binding */ BALL_WIDTH),
 /* harmony export */   BOUNCE_DAMPING: () => (/* binding */ BOUNCE_DAMPING),
 /* harmony export */   CANVAS_HEIGHT: () => (/* binding */ CANVAS_HEIGHT),
 /* harmony export */   CANVAS_WIDTH: () => (/* binding */ CANVAS_WIDTH),
 /* harmony export */   LEFT_BOUNDARY: () => (/* binding */ LEFT_BOUNDARY),
-/* harmony export */   MID_FIELD: () => (/* binding */ MID_FIELD),
+/* harmony export */   MID_FIELD_X: () => (/* binding */ MID_FIELD_X),
+/* harmony export */   MID_FIELD_Y: () => (/* binding */ MID_FIELD_Y),
 /* harmony export */   PLAYER_GRAVITY: () => (/* binding */ PLAYER_GRAVITY),
 /* harmony export */   PLAYER_HEIGHT: () => (/* binding */ PLAYER_HEIGHT),
 /* harmony export */   PLAYER_JUMP_VELOCITY: () => (/* binding */ PLAYER_JUMP_VELOCITY),
@@ -109,8 +111,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   RIGHT_BOUNDARY: () => (/* binding */ RIGHT_BOUNDARY)
 /* harmony export */ });
 var CANVAS_WIDTH = window.innerWidth;
-var CANVAS_HEIGHT = window.innerHeight;
-var MID_FIELD = 430;
+var CANVAS_HEIGHT = 569;
+var BACKGROUND_WIDTH = 3381;
+var MID_FIELD_Y = 430;
+var MID_FIELD_X = BACKGROUND_WIDTH / 2;
 var BALL_GRAVITY = 0.2;
 var PLAYER_GRAVITY = 0.3;
 var BOUNCE_DAMPING = 0.9;
@@ -121,8 +125,10 @@ var PLAYER_MOVE_SPEED = 5;
 var BALL_WIDTH = 60;
 var BALL_HEIGHT = 60;
 var BALL_START_HEIGHT = 500; // Height above the player
-var LEFT_BOUNDARY = 210;
-var RIGHT_BOUNDARY = 1605;
+var LEFT_BOUNDARY = 240;
+var RIGHT_BOUNDARY = 3140;
+// export const BALL_STARTING_POS_X = CANVAS_WIDTH - BALL_WIDTH / 2;
+var BALL_STARTING_POS_Y = 110;
 
 /***/ }),
 
@@ -138,9 +144,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _img_background_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../img/background.png */ "./src/img/background.png");
 /* harmony import */ var _canvas_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../canvas.js */ "./src/js/canvas.js");
+/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../constants.js */ "./src/js/constants.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 var Background = /*#__PURE__*/function () {
@@ -152,7 +160,7 @@ var Background = /*#__PURE__*/function () {
   _createClass(Background, [{
     key: "draw",
     value: function draw() {
-      _canvas_js__WEBPACK_IMPORTED_MODULE_1__.canvasContext.drawImage(this.image, 0, 0);
+      _canvas_js__WEBPACK_IMPORTED_MODULE_1__.canvasContext.drawImage(this.image, _constants_js__WEBPACK_IMPORTED_MODULE_2__.CANVAS_WIDTH / 2 - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BACKGROUND_WIDTH / 2, 0);
     }
   }]);
   return Background;
@@ -196,7 +204,7 @@ var Ball = /*#__PURE__*/function (_GameObject) {
   function Ball() {
     var _this;
     _classCallCheck(this, Ball);
-    _this = _super.call(this, 890, 110, _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_WIDTH, _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_HEIGHT, _img_ball_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
+    _this = _super.call(this, _constants_js__WEBPACK_IMPORTED_MODULE_2__.CANVAS_WIDTH / 2 - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_WIDTH / 2, _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_STARTING_POS_Y, _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_WIDTH, _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_HEIGHT, _img_ball_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
     _this.velocity = {
       x: 0,
       y: 0
@@ -207,7 +215,7 @@ var Ball = /*#__PURE__*/function (_GameObject) {
     key: "update",
     value: function update() {
       _get(_getPrototypeOf(Ball.prototype), "update", this).call(this);
-      if (this.position.y + this.height + this.velocity.y <= _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD) {
+      if (this.position.y + this.height + this.velocity.y <= _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD_Y) {
         this.velocity.y += _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_GRAVITY;
       } else {
         this.velocity.y = -this.velocity.y * _constants_js__WEBPACK_IMPORTED_MODULE_2__.BOUNCE_DAMPING; // Invert and dampen the velocity
@@ -224,7 +232,7 @@ var Ball = /*#__PURE__*/function (_GameObject) {
 
       // Ensure position stays within bounds (adjust as needed)
       this.position.x = Math.max(0, Math.min(this.position.x, 1920 - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_WIDTH)); // Assuming 1920 is the game width
-      this.position.y = Math.max(this.position.y, Math.min(this.position.y, _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_HEIGHT));
+      this.position.y = Math.max(this.position.y, Math.min(this.position.y, _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD_Y - _constants_js__WEBPACK_IMPORTED_MODULE_2__.BALL_HEIGHT));
     }
   }, {
     key: "reset",
@@ -388,17 +396,17 @@ var Player = /*#__PURE__*/function (_GameObject) {
   var _super = _createSuper(Player);
   function Player() {
     _classCallCheck(this, Player);
-    return _super.call(this, 700, _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD, _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_WIDTH, _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_HEIGHT, _img_player_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
+    return _super.call(this, 700, _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD_Y, _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_WIDTH, _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_HEIGHT, _img_player_png__WEBPACK_IMPORTED_MODULE_1__["default"]);
   }
   _createClass(Player, [{
     key: "update",
     value: function update() {
       _get(_getPrototypeOf(Player.prototype), "update", this).call(this);
-      if (this.position.y + this.height + this.velocity.y <= _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD) {
+      if (this.position.y + this.height + this.velocity.y <= _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD_Y) {
         this.velocity.y += _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_GRAVITY;
       } else {
         this.velocity.y = 0;
-        this.position.y = _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD - this.height;
+        this.position.y = _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD_Y - this.height;
       }
     }
   }, {
@@ -415,7 +423,7 @@ var Player = /*#__PURE__*/function (_GameObject) {
   }, {
     key: "jump",
     value: function jump() {
-      if (this.position.y === _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD - this.height) {
+      if (this.position.y === _constants_js__WEBPACK_IMPORTED_MODULE_2__.MID_FIELD_Y - this.height) {
         this.velocity.y = _constants_js__WEBPACK_IMPORTED_MODULE_2__.PLAYER_JUMP_VELOCITY;
       }
     }
@@ -452,7 +460,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + "ce82eb4b7e1dbad3badc70dac5ee1961.png");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + "9941ac0d78ca4c804a1c7cc3c0159f38.png");
 
 /***/ }),
 
